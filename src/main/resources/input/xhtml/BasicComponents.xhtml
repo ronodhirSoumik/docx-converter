@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>table borders example</title>
+	<style type="text/css">
+		 table{
+		   border-width: 1px;
+		   border-style: solid;
+		   border-collapse: separate;
+		   width: 400px;
+		 }
+		 #sh{
+		   empty-cells: show;
+		   margin-bottom: 20px;
+		 }
+		 #hi{
+		   empty-cells: hide;
+		 }
+		 #bc-color {
+			background-color:#ff0000;border-width:3px; border-style: solid;
+		 }
+		 #bc-color-secondary {
+			background-color:#ffff00
+		 }
+		 .custom-size {
+			 width: 120px;
+			 height: 158.8px;
+		 }
+		 .grey-back {
+		  	background-color:#808080FF;
+		 }
+
+	</style>
+</head>
+<body>
+
+	<div id="top">
+		<h1>Heading</h1>
+		<img class="custom-size" src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg' alt='Image'/>
+
+		<div id="transient-container" class="IGNORE">
+			<p>p1</p>
+			<p>p2</p>
+		</div>
+	</div>
+
+  	<p>This example is from <a href="http://www.w3.org/wiki/CSS/Properties/empty-cells">http://www.w3.org/wiki/CSS/Properties/empty-cells</a></p>
+  
+	  <table id="sh">
+		  <caption>Cups of coffee consumed by each senator 1</caption>
+		  <tr>
+		  <th style="border-width:1px; border-style: solid;">Values</th>
+		  <td style="border-width:1px; border-style: solid;">top | bottom | inherit</td>
+		</tr>
+		<tr>
+		  <th style="border-width:1px; border-style: solid;">Initial value</th>
+		  <td style="border-width:1px; border-style: solid;"></td>
+		</tr>
+	  </table>
+
+	  <table id="hi">
+		<tr>
+		  <th style="border-width:1px; border-style: solid;">Values</th>
+		  <td style="border-width:1px; border-style: solid;">top | bottom | inherit</td>
+		</tr>
+		<tr>
+		  <th style="border-width:1px; border-style: solid;">Initial value</th>
+		  <td style="border-width:1px; border-style: solid;"></td>
+		</tr>
+	  </table>
+
+	<!--  rows, cols, row groups, col groups cannot have borders - these should be ignored -->
+
+	  <table style="border-style:none;">
+<!--		  <caption>Cups of coffee consumed by each senator 2</caption>-->
+		  <thead>
+			<tr>
+			  <th>Values</th>
+			  <td>blagh</td>
+			</tr>
+			<tr style="border-style:none;">
+			  <td>Initial value</td>
+			  <td>blagh</td>
+			</tr>
+			<tr style="border-style:none;">
+			  <td>Initial value</td>
+			  <td>blagh</td>
+			</tr>
+			<tr style="border-style:solid;"> <!--  should be ignored -->
+			  <td>Initial value</td>
+			  <td>blagh</td>
+			</tr>
+			<tr style="border-style:none;">
+			  <td>Initial value</td>
+			  <td>blagh</td>
+			</tr>
+		</thead>
+		<tbody style="border-width:1px; border-style: solid;"> <!--  should be ignored -->
+			<tr>
+			  <th>Values</th>
+			  <td>blagh</td>
+			</tr>
+			<tr>
+			  <td>Initial value</td>
+			  <td>blagh</td>
+			</tr>
+			<tr>
+			  <td>Initial value</td>
+			  <td>blagh</td>
+			</tr>
+		</tbody>
+	  </table>
+
+	<table style="border-style:none;">
+<!--		<caption>Cups of coffee consumed by each senator 3</caption>-->
+
+		<colgroup>
+		<col style="background-color:#ff0000; border-width:3px; border-style: solid;" span="2"/> <!--  should be ignored -->
+		<col style="background-color:#ffff00;"/>
+	  </colgroup>
+	  <tr>
+		<th style="background-color:#ff0000; border-width:3px; border-style: solid;" >ISBN</th>
+		<th>Title</th>
+		<th>Price</th>
+	  </tr>
+	  <tr>
+		<td>3476896</td>
+		<td>My first HTML</td>
+		<td>$53</td>
+	  </tr>
+	</table>
+
+	<table class="grey-back" border="4">
+<!--		<caption>Cups of coffee consumed by each senator 4</caption>-->
+
+		<tr>
+		   <th>Month</th>
+		   <th>Savings</th>
+		</tr>
+		<tr style="background-color: #ff0000;">
+		   <td style="background-color: #00ff00;">January</td>
+		   <td>$100</td>
+		</tr>
+		<tr>
+		   <td>February</td>
+		   <td>$80</td>
+		</tr>
+	 </table>
+
+</body>
+</html>

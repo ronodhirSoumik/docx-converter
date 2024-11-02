@@ -1,0 +1,138 @@
+buildscript {
+    repositories {
+        mavencentral()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
+    }
+}
+
+plugins {
+    id 'war'
+    id 'java'
+    id 'com.bmuschko.tomcat' version '2.5'
+}
+
+group 'docx.converter'
+version '1.0'
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaComple) {
+        options.compileArgs += ['-Xlint:none', '-Xlint:unchecked']
+    }
+}
+
+war {
+    archiveFileName = 'DoCx-CONVERTER.war'
+}
+
+ext {
+    junitversion = '5.8.0-M1'
+    springVersion = '5.3.34'
+    springDocVersion = '1.5.7'
+    jacksonVersion = '2.12.3'
+    mapStructVersion = '1.4.2.Final'
+    springSecurityVersion = '5.7.12'
+}
+
+dependencies {
+    providedCompile "javax.servlet:javax.servlet-api:4.0.1"
+
+    implementation fileTree(dir: 'lib', include: '*.jar')
+
+    implementation "org.springframework:spring-webmvc:$springVersion"
+    implementation "org.springframework:spring-context-support:$springVersion"
+    implementation "org.springframework:spring-jdbc:$springVersion"
+    implementation "org.springframework:spring-orm:$springVersion"
+    implementation "org.springframework:spring-tx:$springVersion"
+    implementation "org.springframework.security:spring-security-web:$springSecurityVersion"
+    implementation "org.springframework.security:spring-security-config:$springSecurityVersion"
+
+    implementation "org.hibernate:hibernate-core:5.4.25.Final"
+    implementation "org.hibernate:hibernate-validator:6.1.6.Final"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+    implementation "org.sitemesh:sitemesh:3.0.1"
+    implementation "org.apache.commons:commons-lang3:3.12.0"
+    implementation "commons-io:commons-io:2.8.0"
+    implementation "org.apache.commons:commons-text:1.9"
+    implementation "commons-collections:commons-collections:3.2.1"
+    implementation "commons-codec:commons-codec:1.11"
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    runtimeOnly 'org.apache.logging.log4j:log4j-core:2.17.1'
+    runtimeOnly 'org.apache.logging.log4j:log4j-jcl:2.17.1'
+//    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
+    implementation "org.springdoc:springdoc-openapi-ui:$springDocVersion"
+    implementation group: 'net.minidev', name: 'json-smart', version: '2.4.10'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.10'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.7.1'
+    implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
+    implementation group: 'commons-lang', name: 'commons-lang', version: '2.4'
+    implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.8.10'
+    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.10'
+
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+    implementation group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.23'
+    implementation group: 'com.google.zxing', name: 'javase', version: '3.5.1'
+    implementation "commons-fileupload:commons-fileupload:1.4"
+
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68'
+    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.68'
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc8:19.6.0.0'
+    implementation 'com.oracle.database.jdbc:ucp:19.6.0.0'
+
+    runtimeOnly "javax.servlet:jstl:1.2"
+    implementation "javax.mail:mail:1.4.7"
+
+    implementation group: 'org.docx4j', name: 'docx4j-core', version: '8.3.10'
+    implementation group: 'org.docx4j', name: 'docx4j-JAXB-ReferenceImpl', version: '8.1.0'
+    implementation group: 'org.docx4j', name: 'docx4j-ImportXHTML', version: '8.3.10'
+
+    implementation "org.slf4j:slf4j-api:1.7.26"
+
+    testImplementation fileTree(dir: 'lib', include: '*.jar')
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation 'org.mockito:mockito-core:4.3.1'
+
+//    compileOnly 'org.springframework:spring-beans:3.2.17.RELEASE'
+//    compileOnly 'org.springframework:spring-webmvc:3.2.17.RELEASE'
+//    compileOnly 'org.springframework:spring-context:3.2.17.RELEASE'
+//
+//    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+//    implementation 'org.hibernate:hibernate-core:3.6.10.Final'
+//    runtimeOnly 'mysql:mysql-connector-java:8.0.23'
+//    implementation 'javax.servlet:jstl:1.2'
+
+    def tomcatVersion = '9.0.1'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+tomcat {
+    httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+}
+
+//tomcatRun {
+//    contextPath = '/'
+//    httpPort = 8080
+//    stopPort = 8191
+//}
